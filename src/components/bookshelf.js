@@ -7,7 +7,8 @@ class Bookshelf extends Component {
     static propTypes = {
       books: PropTypes.array.isRequired,
       title: PropTypes.string.isRequired,
-      shelfId: PropTypes.string.isRequired
+      shelfId: PropTypes.string.isRequired,
+      onMoveBook: PropTypes.func.isRequired
     }
     render(){
         const { books } = this.props
@@ -34,6 +35,7 @@ class Bookshelf extends Component {
                               selectedOption={this.props.shelfId}
                               title={book.title}
                               authors={book.authors}
+                              onMove={this.props.onMoveBook}
                             />
                           </li>
                         )

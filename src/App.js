@@ -18,6 +18,25 @@ class BooksApp extends React.Component {
     })
   }
 
+  moveBook = (book, shelf) => {
+    let bookToUpdate ={
+      id: book
+    }
+    BooksAPI.update(bookToUpdate, shelf).then((res) => {
+      //The setState is called inside of .then() so it's sure that the call was sucessful
+      this.setState(state => {
+        let books = this.state.books.map(item => {
+          if(bookToUpdate.id === item.id)
+          item.shelf = shelf;
+          return item;
+        })
+        return {
+          books: books
+        }
+      })
+    })
+  }
+
   render() {
     const shelves = [
       { title: "Currently Reading", id: "currentlyReading"},
@@ -27,8 +46,11 @@ class BooksApp extends React.Component {
     
     return (
       <div className="app">
+        
         <Route path="/search" render={() => (
-          <Search booksOnShelf={this.state.books}/>
+          <Search 
+            booksOnShelf={this.state.books}
+          />
         )}
         />
         <Route exact path="/" render={() => (
@@ -47,6 +69,7 @@ class BooksApp extends React.Component {
                     books={shelfBooks}
                     title={shelf.title}
                     shelfId={shelf.id}
+                    onMoveBook={this.moveBook}
                   />
                 )
 
