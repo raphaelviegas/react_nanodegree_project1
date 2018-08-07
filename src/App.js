@@ -9,7 +9,7 @@ import Bookshelf from './components/bookshelf'
 
 class BooksApp extends React.Component {
   state = {
-    books: []
+    books: {}
   }
 
   componentDidMount (){
@@ -19,16 +19,10 @@ class BooksApp extends React.Component {
   }
 
   render() {
-    const shelves = [
-      { title: "Currently Reading", id: "currentlyReading"},
-      { title: "Want to Read", id: "wantToRead"},
-      { title: "Read", id: "read"},
-    ]
-    
     return (
       <div className="app">
         <Route path="/search" render={() => (
-          <Search booksOnShelf={this.state.books}/>
+          <Search />
         )}
         />
         <Route exact path="/" render={() => (
@@ -37,20 +31,7 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
-              {shelves.map((shelf) => {
-                //filter books to the current shelf
-                let shelfBooks = this.state.books.filter((book) => book.shelf === shelf.id)
-                
-                return (
-                  <Bookshelf 
-                    key={shelf.id}
-                    books={shelfBooks}
-                    title={shelf.title}
-                    shelfId={shelf.id}
-                  />
-                )
-
-              })}
+              <Bookshelf />
             </div>
             <div className="open-search">
               <Link to="/search">Add a book</Link>
