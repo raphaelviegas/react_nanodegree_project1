@@ -1,7 +1,9 @@
-###Projeto MyReads
+# Projeto MyReads
 O Projeto MyReads foi desenvolvido como parte da formação do Programa Nanodegree Desenvolvedor React, da Udacity.
-Projeto elaborado por: Raphael Viegas (raphaelhviegas@gmail.com)
-Data de conclusão do projeto:  
+
+Project created by: Raphael Viegas (raphaelhviegas@gmail.com)
+
+Date of conclusion:   
 
 
 #MyReads Project
