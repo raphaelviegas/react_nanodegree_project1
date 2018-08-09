@@ -24,10 +24,10 @@ class BooksApp extends React.Component {
     }
     BooksAPI.update(bookToUpdate, shelf).then((res) => {
       //The setState is called inside of .then() so it's sure that the call was sucessful
-      this.setState(state => {
+      this.setState(() => {
         let books = this.state.books.map(item => {
           if(bookToUpdate.id === item.id)
-          item.shelf = shelf;
+            item.shelf = shelf;
           return item;
         })
         return {

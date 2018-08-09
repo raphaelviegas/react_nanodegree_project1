@@ -99,6 +99,22 @@ body, .app {
   font-size: 0;
 }
 
+.error-div{
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-message{
+  font-size: 1.5rem;
+  color: #a5a5a5;
+}
+
 .search-books-results {
   padding: 80px 10px 20px;
 }

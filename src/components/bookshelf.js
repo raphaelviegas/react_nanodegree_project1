@@ -24,7 +24,7 @@ class Bookshelf extends Component {
                         if (book.imageLinks.smallThumbnail) {
                           smallThumbnail=book.imageLinks.smallThumbnail
                         } else {
-                          smallThumbnail="http://via.placeholder.com/128X193"
+                          smallThumbnail="http://placehold.jp/ebebeb/d90f38/128x192.png?text=Cover%20Not%20Available"
                         }
                         
                         return (
