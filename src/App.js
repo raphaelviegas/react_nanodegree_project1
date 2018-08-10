@@ -12,24 +12,28 @@ class BooksApp extends React.Component {
     books: []
   }
 
-  componentDidMount (){
+  componentDidMount() {
     BooksAPI.getAll().then(books => {
       this.setState({ books })
     })
   }
 
-  moveBook = (book, shelf) => {
-    let bookToUpdate ={
-      id: book
-    }
+  moveBook = (bookToUpdate, shelf) => {
     BooksAPI.update(bookToUpdate, shelf).then((res) => {
       //The setState is called inside of .then() so it's sure that the call was sucessful
-      this.setState(() => {
-        let books = this.state.books.map(item => {
-          if(bookToUpdate.id === item.id)
+      this.setState((state) => {
+        let bookExists = false
+        let books = state.books.map(item => {
+          if (bookToUpdate.id === item.id) {
             item.shelf = shelf;
+            bookExists = true
+          }
           return item;
         })
+        if (!bookExists) {
+          bookToUpdate.shelf = shelf
+          books.push(bookToUpdate)
+        }
         return {
           books: books
         }
@@ -38,22 +42,25 @@ class BooksApp extends React.Component {
   }
 
   render() {
+
     const shelves = [
-      { title: "Currently Reading", id: "currentlyReading"},
-      { title: "Want to Read", id: "wantToRead"},
-      { title: "Read", id: "read"},
+      { title: "Currently Reading", id: "currentlyReading" },
+      { title: "Want to Read", id: "wantToRead" },
+      { title: "Read", id: "read" },
     ]
-    
+    const {books} = this.state
+
     return (
       <div className="app">
-        
+      
         <Route path="/search" render={() => (
-          <Search 
-            booksOnShelf={this.state.books}
-            onMoveBook={this.moveBook}
+          <Search
+            booksOnShelf={books}
+            onSearchMoveBook={this.moveBook}
           />
         )}
         />
+
         <Route exact path="/" render={() => (
           <div className="list-books">
             <div className="list-books-title">
@@ -62,10 +69,9 @@ class BooksApp extends React.Component {
             <div className="list-books-content">
               {shelves.map((shelf) => {
                 //filter books to the current shelf
-                let shelfBooks = this.state.books.filter((book) => book.shelf === shelf.id)
-                
+                let shelfBooks = books.filter((book) => book.shelf === shelf.id)
                 return (
-                  <Bookshelf 
+                  <Bookshelf
                     key={shelf.id}
                     books={shelfBooks}
                     title={shelf.title}
@@ -73,7 +79,6 @@ class BooksApp extends React.Component {
                     onMoveBook={this.moveBook}
                   />
                 )
-
               })}
             </div>
             <div className="open-search">

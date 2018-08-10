@@ -4,38 +4,37 @@ import PropTypes from 'prop-types'
 class Book extends Component {
 
     static propTypes = {
-        id: PropTypes.string.isRequired,
         coverUrl: PropTypes.string,
         selectedOption: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        authors: PropTypes.array,
-        onMove: PropTypes.func.isRequired
+        onMove: PropTypes.func.isRequired,
+        bookInfo: PropTypes.object
     }
 
-    handleSelectChange = (event, bookId) => {
-        this.props.onMove(this.props.id, event.target.value)
+    handleSelectChange = (event) => {
+        this.props.onMove(this.props.bookInfo, event.target.value)
     }
-    
+
     render() {
-
+        const {bookInfo, coverUrl, selectedOption} = this.props
+        
         return (
             <div className="book">
                 <div className="book-top">
-                <div className="book-cover" 
-                    style={{ backgroundImage: `url(${this.props.coverUrl})` }}>
+                    <div className="book-cover"
+                        style={{ backgroundImage: `url(${coverUrl})` }}>
+                    </div>
+                    <div className="book-shelf-changer">
+                        <select defaultValue={selectedOption} onChange={this.handleSelectChange}>
+                            <option value="move" disabled>Move to...</option>
+                            <option value="currentlyReading">Currently Reading</option>
+                            <option value="wantToRead">Want to Read</option>
+                            <option value="read">Read</option>
+                            <option value="none">None</option>
+                        </select>
+                    </div>
                 </div>
-                <div className="book-shelf-changer">
-                    <select defaultValue={this.props.selectedOption} onChange={this.handleSelectChange}>
-                        <option value="move" disabled>Move to...</option>
-                        <option value="currentlyReading">Currently Reading</option>
-                        <option value="wantToRead">Want to Read</option>
-                        <option value="read">Read</option>
-                        <option value="none">None</option>
-                    </select>
-                </div>
-                </div>
-                <div className="book-title">{this.props.title}</div>
-                {this.props.authors && this.props.authors.map((author,index) => (
+                <div className="book-title">{bookInfo.title}</div>
+                {bookInfo.authors && bookInfo.authors.map((author, index) => (
                     <div className="book-authors" key={index}>{author}</div>
                 ))}
             </div>
