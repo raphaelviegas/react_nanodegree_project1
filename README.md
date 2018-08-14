@@ -1,5 +1,5 @@
 # MyReads Project
-This project was developed as part of the Udacity's React Fundamentals course. The App show a list of books that can be organized in shelves, based on their current reading status ['Currently Reading', 'Want to Read' and 'Read']. By clicking on the + button on the botton right corner, you can search for new books to add to your library. Check the [`SEARCH_TERMS`](SEARCH_TERMS.MD) for more information about the terms that you can search form
+This project was developed as part of the Udacity's React Fundamentals course. The App show a list of books that can be organized in shelves, based on their current reading status ['Currently Reading', 'Want to Read' and 'Read']. By clicking on the + button on the botton right corner, you can search for new books to add to your library. Check the [`SEARCH_TERMS`](SEARCH_TERMS.MD) for more information about the terms that you can search for.
 
 Project developed by: Raphael Viegas (raphaelhviegas@gmail.com) on August, 2018.
 
